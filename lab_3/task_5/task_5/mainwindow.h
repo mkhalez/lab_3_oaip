@@ -1,7 +1,11 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
+
+#include <qfilesystemmodel.h>
+
 #include <QMainWindow>
+#include <QTreeWidgetItem>
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -18,11 +22,13 @@ class MainWindow : public QMainWindow {
 
    private:
     Ui::MainWindow* ui;
-    void CountFilesAndFolders(const QString& dir_path, int& folder_count,
-                              int& file_count);
-    QString dir_;
+    QFileSystemModel* fileSystemModel;
+
+    void open();
+    static void dirsAndFilesCount(const QString& dirPath, long long& dirsCount,
+                                  long long& filesCount);
 
    private slots:
-    void OpenDir();
+    void openFile(QModelIndex index);
 };
 #endif	// MAINWINDOW_H
